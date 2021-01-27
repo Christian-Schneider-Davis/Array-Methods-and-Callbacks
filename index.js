@@ -32,8 +32,8 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 
-function getFinals(/* code here */) {
-   /* code here */
+function getFinals(data) {
+  return data.filter(game => game.Stage === "final");
 }
 
 
@@ -61,7 +61,7 @@ function getWinners(/* code here */) {
     /* code here */
 }
 
-
+//.map
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use the higher-order function getWinnersByYear to do the following:
@@ -73,11 +73,14 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
-}
+function getWinnersByYear(data, getYearsCB, getWinnersCB) {
+   const getYears =getYearsCB(data, getFinals);
+   const getWinners = getWinnersCB(data, getFinals);
+   return getYears.map((item, index)=> {
+       return 'in ${item}, ${getWinners[index]} won the world cup!';});
+   }
 
-
+console.log(getWinnersByYear(fifaData, getYears, getWiners));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Use the higher order function getAverageGoals to do the following: 
@@ -89,12 +92,15 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(getFinalsData) {
+   const totalGoals = getFinalsData.reduce (function(accumulator, item){
+   return accumulator + item ["Home Team Goals"] + item["Away Team Goals"];}, 0);
+   
+   return (Math.round((totalGoals / getFinalsDate.length) * 100 / 100).toString();
 }
 
 
-
+console.log(getAverageGoals(getFinals(fifaData)));
 
 /// 🥅 STRETCH 🥅 ///
 
